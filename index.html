@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 19 | Loading...</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="xp-container">
+        <div class="xp-label">NÍVEL 18 ➝ 19</div>
+        <div class="xp-bar-bg">
+            <div class="xp-bar-fill" id="xpFill"></div>
+        </div>
+    </div>
+
+    <audio id="levelupSound" src="levelup.mp3" preload="auto"></audio>
+
+    <div class="level-up-overlay hidden" id="levelupOverlay">
+        <h1>NÍVEL 19 DESBLOQUEADO! 🆙</h1>
+        <p>Nova skin "Adulto Premium" adquirida.</p>
+        <button onclick="closeOverlay()">COLETAR RECOMPENSA</button>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="Carregando...">Recuperando dados desde 2007...</h1>
+            <h2 class="sub-glitch">Atualização de Sistema v.1.9</h2>
+            <div class="emoji-container">
+                <span class="floating-emoji">👾</span>
+                <span class="floating-emoji delay">🎂</span>
+            </div>
+            <p class="impact-text">Role para ganhar XP</p>
+        </div>
+    </header>
+
+    <div class="timeline-container">
+        
+        <div class="timeline-item left">
+            <div class="timeline-content glass">
+                <div class="number">01</div>
+                <h2>A Investigação 🕵️‍♂️</h2>
+                <div class="terminal-view">
+                    <p>> Buscando "Data de Nascimento"...</p>
+                    <p>> Analisando logs do servidor...</p>
+                    <p>> Conclusão: O sistema confirmou o evento.</p>
+                    <p class="highlight-terminal">Sim, eu lembrei. 🤡</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-content glass center-text">
+                <h3>Tutorial Concluído.</h3>
+                <p>Você sobreviveu a 18 fases difíceis.</p>
+                <h2 class="neon-text">PREPARE-SE PARA O BOSS.</h2>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-content glass">
+                <h2>📸 Galeria de Conquistas</h2>
+                <p>Screenshots de momentos épicos (ou nem tanto).</p>
+                <div class="sticker-grid">
+                    <div class="sticker delay-1"><img src="img/Screenshot_20241009_081259_Facebook.jpg" alt="Zoeira"></div>
+                    <div class="sticker delay-2"><img src="img/20230801_123732.jpg" alt="Zoeira"></div>
+                    <div class="sticker delay-3"><img src="img/IMG-20220315-WA0008.jpeg" alt="Zoeira"></div>
+                    <div class="sticker delay-3"><img src="img/IMG-20220622-WA0214.jpg" alt="Zoeira"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-content glass quote-box">
+                <blockquote>
+                    “O essencial não é viver, mas viver com sentido.”
+                </blockquote>
+                <cite>— NPC Sábio (Sêneca)</cite>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-content glass">
+                <h2>Co-op Mode 🤝</h2>
+                <p>Valeu pela parceria no server da vida e no <strong>EsmaelTech</strong>.</p>
+                <p>Ter um player 2 de confiança faz toda a diferença na gameplay.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item center-item" id="finalStepTrigger">
+            <div class="timeline-content glass celebration">
+                <h2>Quase lá... ⏳</h2>
+                <p>Sua barra de XP está 99% cheia.</p>
+                <p>Role mais um pouco para a evolução final.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item center-item hidden-at-start" id="finalGiftSection">
+            <div class="timeline-content glass gift-section" id="giftSection">
+                <h2 class="gold-text">🎁 Loot Box de Nível 19</h2>
+                <p>Recompensa exclusiva desbloqueada!</p>
+                
+                <div class="gift-locker" id="giftLocker">
+                    <div class="lock-overlay">
+                        <span class="lock-icon">🔓</span>
+                        <p class="pulse-text">CLIQUE PARA ABRIR</p>
+                    </div>
+                    <div class="hidden-code">XXXXXX</div>
+                </div>
+
+                <div class="gift-revealed hidden" id="giftRevealed">
+                    <p class="congrats">✨ DROP LENDÁRIO! ✨</p>
+                    <div class="final-code-box">
+                        <span id="giftCode">LEVEL19-PRO</span>
+                        <button onclick="copyCode()" id="copyBtn">COPIAR</button>
+                    </div>
+                    <p class="small-text">Use no WhatsApp do Admin.</p>
+                </div>
+
+            </div>
+            
+            <div class="final-message">
+                <h2>Feliz Nível 19! 🎮💙</h2>
+                <p>Que o próximo ano tenha gráficos melhores e menos bugs.</p>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

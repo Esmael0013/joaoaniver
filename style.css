@@ -1,0 +1,200 @@
+:root {
+    --bg-dark: #050505;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    /* Cores Iniciais (Azul/Roxo) */
+    --main-neon: #00f3ff;
+    --secondary-neon: #bc13fe;
+    --text-main: #ffffff;
+    --xp-bar-height: 30px;
+}
+
+/* TEMA DE LEVEL UP (Ativado via JS no final) */
+body.theme-levelup {
+    --main-neon: #ffd700; /* Dourado */
+    --secondary-neon: #ff4500; /* Laranja avermelhado */
+}
+body.theme-levelup .timeline-container::after {
+    box-shadow: 0 0 20px var(--main-neon);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0; padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    padding-top: var(--xp-bar-height); /* Espaço para a barra fixa */
+    transition: --main-neon 1s, --secondary-neon 1s;
+}
+
+/* XP BAR FIXA */
+.xp-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    height: var(--xp-bar-height);
+    background: #111;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--main-neon);
+}
+.xp-label {
+    padding: 0 15px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: var(--main-neon);
+    white-space: nowrap;
+}
+.xp-bar-bg {
+    flex-grow: 1;
+    background: #222;
+    height: 100%;
+    position: relative;
+}
+.xp-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0%; /* Começa vazio */
+    background: linear-gradient(90deg, var(--main-neon), var(--secondary-neon));
+    box-shadow: 0 0 10px var(--main-neon);
+    transition: width 0.2s ease-out;
+}
+
+/* OVERLAY DE LEVEL UP */
+.level-up-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 0.5s forwards;
+}
+.level-up-overlay h1 {
+    font-size: 3rem;
+    color: #ffd700;
+    text-shadow: 0 0 20px #ffd700, 0 0 40px #ff4500;
+    animation: pulseText 1s infinite alternate;
+}
+.level-up-overlay button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ffd700, #ff4500);
+    border: none; border-radius: 50px;
+    color: #000; font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ffd700;
+}
+.level-up-overlay.hidden { display: none; }
+
+@keyframes pulseText {
+    from { transform: scale(1); } to { transform: scale(1.1); }
+}
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+
+/* HERO SECTION */
+.hero {
+    min-height: 90vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+}
+.glitch {
+    font-size: 2.5rem; font-weight: 900; text-transform: uppercase;
+    text-shadow: 2px 2px var(--secondary-neon);
+}
+.sub-glitch { font-size: 1.5rem; font-weight: 300; color: var(--main-neon); }
+.emoji-container { font-size: 4rem; margin: 20px 0; }
+.floating-emoji { display: inline-block; animation: float 3s ease-in-out infinite; }
+.delay { animation-delay: 1.5s; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+/* TIMELINE & CARDS (Mantido similar, mas usando as variáveis de cor) */
+.timeline-container {
+    position: relative; max-width: 900px; margin: 0 auto; padding: 40px 20px;
+    padding-bottom: 150px; /* Espaço extra no final para rolar */
+}
+.timeline-container::after {
+    content: ''; position: absolute; width: 2px;
+    background: linear-gradient(180deg, var(--main-neon), var(--secondary-neon));
+    top: 0; bottom: 0; left: 50%; margin-left: -1px;
+    box-shadow: 0 0 10px var(--main-neon); z-index: -1;
+    transition: all 1s;
+}
+.timeline-item {
+    padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box;
+    opacity: 0; transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.glass {
+    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+.number {
+    position: absolute; top: -15px; right: -15px; background: var(--secondary-neon);
+    width: 40px; height: 40px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-weight: bold;
+    box-shadow: 0 0 10px var(--secondary-neon);
+    transition: background 1s, box-shadow 1s;
+}
+.left { left: 0; transform: translateX(-100px); }
+.right { left: 50%; transform: translateX(100px); }
+.center-item { width: 100%; left: 0; text-align: center; transform: scale(0.8); margin-top: 50px; }
+.timeline-item.show { opacity: 1; transform: translateX(0) scale(1); }
+
+/* ESTILOS INTERNOS ESPECÍFICOS */
+.terminal-view { background: #000; padding: 15px; font-family: monospace; border-radius: 8px; border-left: 3px solid var(--main-neon); color: #0f0; font-size: 0.9rem; text-align: left;}
+.highlight-terminal { color: var(--secondary-neon); font-weight: bold; margin-top: 10px;}
+.sticker-grid { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap;}
+.sticker img { width: 100px; height: 100px; border-radius: 15px; border: 2px solid rgba(255,255,255,0.2); transition: 0.4s; }
+.sticker img:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 15px var(--main-neon); }
+
+/* LOOT BOX FINAL (Modificada para Dourado) */
+.hidden-at-start { opacity: 0; pointer-events: none; transition: opacity 1s;}
+.hidden-at-start.reveal-loot { opacity: 1; pointer-events: all; }
+
+.gold-text { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
+.gift-locker {
+    position: relative; width: 100%; height: 120px; background: #111;
+    border-radius: 15px; cursor: pointer; overflow: hidden; transition: 0.3s;
+    border: 2px solid #ffd700; box-shadow: 0 0 20px #ffd700; /* Sempre dourado agora */
+}
+.lock-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; z-index: 2; transition: 0.5s;
+}
+.lock-icon { font-size: 3rem; margin-bottom: 10px; }
+.pulse-text { animation: pulseText 1s infinite alternate; font-weight: bold; color: #ffd700;}
+.hidden-code {
+    display: flex; align-items: center; justify-content: center; height: 100%;
+    font-family: monospace; font-size: 2rem; filter: blur(8px); color: #ffd700;
+}
+.gift-locker.unlocked { transform: scale(0); height: 0; opacity: 0; }
+.gift-revealed { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.hidden { display: none; }
+.final-code-box {
+    background: linear-gradient(90deg, #111, #332200); padding: 15px;
+    border-radius: 10px; border: 2px solid #ffd700; display: flex;
+    justify-content: space-between; align-items: center; margin-top: 15px;
+}
+#giftCode { font-family: monospace; font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #ffd700; }
+#copyBtn { background: #ffd700; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; color: #000; box-shadow: 0 0 10px #ffd700;}
+@keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+.final-message { margin-top: 40px; }
+
+@media screen and (max-width: 768px) {
+    .timeline-container::after { left: 20px; }
+    .timeline-item { width: 100%; padding-left: 50px; padding-right: 10px; }
+    .timeline-item.right { left: 0; }
+    .left, .right { transform: translateX(50px); }
+    .number { left: -35px; right: auto; }
+    .xp-label { font-size: 0.7rem; padding: 0 10px;}
+}
